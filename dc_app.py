@@ -192,6 +192,8 @@ movies = [
 "Crazy Cukkad Family"
 ]
 
+if 'movie' not in st.session_state:
+  st.session_state.movie = "⠀"
 
 col1, col2 = st.columns(2)
 
