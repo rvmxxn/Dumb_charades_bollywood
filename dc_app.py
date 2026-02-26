@@ -206,6 +206,17 @@ st.divider()
 st.write("⏱️ Timer")
 timer_seconds = st.number_input("Set timer (seconds):", min_value=10, max_value=300, value=60)
 
+def play_buzzer():
+  st.markdown(
+    f'''
+    <audio autoplay>="true">
+      <source src="data:audio/wav;base64,{base64.64encode(open(buzzer.wav, 'rb').read()).decode()}" type="audio/wav">
+    </audio>
+    ''',
+    unsafe_allow_html=True
+  )
+                                      
+
 if st.button('⏳ Start Timer'):
   placeholder = st.empty()
 
