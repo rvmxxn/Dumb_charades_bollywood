@@ -210,7 +210,7 @@ def play_buzzer():
   st.markdown(
     f'''
     <audio autoplay>="true">
-      <source src="data:audio/wav;base64,{base64.64encode(open(buzzer.wav, 'rb').read()).decode()}" type="audio/wav">
+      <source src="data:audio/wav;base64,{base64.b64encode(open('buzzer.wav', 'rb').read()).decode()}" type="audio/wav">
     </audio>
     ''',
     unsafe_allow_html=True
