@@ -220,7 +220,7 @@ def play_buzzer():
 if st.button('⏳ Start Timer'):
   placeholder = st.empty()
 
-  for remaining in range(timer_seconds, 0, -1):
+  for remaining in range(timer_seconds, -1, -1):
     mins, secs = divmod(remaining, 60)
     time_str = f"{mins:02d}:{secs:02d}"
     placeholder.metric("Time Remaining", time_str)
