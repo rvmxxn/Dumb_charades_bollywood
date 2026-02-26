@@ -3,6 +3,7 @@ import streamlit as st
 import random
 import time
 import base64
+import os
 
 st.set_page_config(page_title = "Dumb Charades", page_icon = "🎭", layout = "wide")
 st.title("🎭 Dumb Charades")
@@ -206,11 +207,16 @@ st.divider()
 st.write("⏱️ Timer")
 timer_seconds = st.number_input("Set timer (seconds):", min_value=10, max_value=300, value=60)
 
+buzzer_base64_sound = ""
+if os.path.exists('buzzer.wav'):
+  with open('buzzer.wav', 'rb') as f:
+    buzzer_base64_sound = base64.b64encode(f.read()).decode()
+
 def play_buzzer():
   st.markdown(
     f'''
     <audio autoplay>="true">
-      <source src="data:audio/wav;base64,{base64.b64encode(open('buzzer.wav', 'rb').read()).decode()}" type="audio/wav">
+      <source src="data:audio/wav;base64,{buzzer_base64_sound}" type="audio/wav">
     </audio>
     ''',
     unsafe_allow_html=True
