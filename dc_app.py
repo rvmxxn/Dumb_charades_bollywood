@@ -200,7 +200,7 @@ col1, col2 = st.columns(2)
 with col1:
   if st.button ('🎲 Pick a Movie'):
     st.session_state.movie = random.choices(movies)
-st.subheader(f"Your Movie: st.session_state.movie")
+st.subheader(f"Your Movie: (st.session_state.movie)")
 
 st.divider()
 st.write("⏱️ Timer")
