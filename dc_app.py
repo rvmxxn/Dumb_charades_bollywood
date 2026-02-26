@@ -1,0 +1,221 @@
+
+import streamlit as st
+import random
+import time
+import base64
+
+st.set_page_config(page_title = "Dumb Charades", page_icon = "🎭", layout = "wide")
+st.title("🎭 Dumb Charades")
+
+movies = [
+"Matru Ki Bijlee Ka Mandola",
+"Aaj Ka MLA Ram Avtar",
+"Qayamat Se Qayamat Tak",
+"Murde Ki Jaan Khatre Mein",
+"Hello! Hum Lallan Bol Rahe Hain",
+"Jis Desh Mein Ganga Rehta Hain",
+"Umar 55 Ki Dil Bachpan Ka",
+"Ajab Prem Ki Gajab Kahani",
+"The Legend of Michael Mishra",
+"Ganga Maang Rhi Balidan",
+"Sonu Ke Titu Ki Sweety",
+"Bhavesh Joshi Superhero",
+"Manorama Six Feet Under",
+"Beta Ho To Aisa",
+"Kaashi in Search of Ganga",
+"Khullam Khulla Payar Karen",
+"Kyo Ki…Me Jhoot Nhi Bolta",
+"Haeena Maan Jaayegi",
+"Ek Se Mera Kya Hoga",
+"Daroga Babu – I Love You",
+"Kabhi Alvida Naa Kehna",
+"Laaga Chunri Mein Daag",
+"Muqqadar Ka Sikandar",
+"Do Aur Do Paanch",
+"Sone Ka Dil Lohe Ke Haath",
+"Kambhakat Ishq",
+"De Dana Dan",
+"Once Upon a Time in Mumbai",
+"Bachchan Pandey",
+"Main Prem Ki Deewani Hoon",
+"Jab Pyaar Kisi Se Hota Hai",
+"Prem Ratan Dhan Payo",
+"Pyaar Kiya to Darna Kya",
+"Detective Byomkesh Bakshy",
+"Love Per Square Foot",
+"Aam Daani Atthanni Kharcha Rupaiya",
+"Amar Akbar Anthony",
+"Nanu Ki Jaanu",
+"Haider",
+"Dedh Ishqiya",
+"Guzaarish",
+"Dil Hai Ki Manta Nhi",
+"Rang De Basanti",
+"Kal Ho Na Ho",
+"Jab Tak Hai Jaan",
+"Baazigar",
+"Ram Jaane",
+"Veer Zaara",
+"Jolly LLB",
+"Rustom",
+"Jo Bole So Nihaal",
+"Vishwatma",
+"Singh Sahab the Great",
+"Bob Vishwas",
+"Mr 100%",
+"Andheri Raat Mein Diya Tere Haath Mein",
+"Paap Ko Jalakar Raakh Kar Doonga",
+"Do Ladke Dono Kadke",
+"Bhediyon Ka Samooh",
+"Dulhan Wahi Jo Piya Man Bhaye",
+"Dilruba Tangewali",
+"Jajantaram Mamantaram",
+"Mohan Joshi Hazir Ho!",
+"Mehndi Ban Gai Khoon",
+"Laali Ki Shaadi Mein Laaddoo Deewana",
+"Sasti Dulhan Mahenga Dulha",
+"Ajab Singh Ki Gajab Kahani",
+"Badhti Ka Naam Dadhi",
+"Teri Maang Sitaron Se Bhar Doon",
+"Guru Suleman Chela Pahelwan",
+"Ghar Mein Ram Gali Mein Shyam",
+"Allah Meherban to Gadha Pahelwan",
+"Saawariya",
+"Udhar Ka Sindur",
+"Banaras",
+"36 China Town",
+"Anwar",
+"Anjaane",
+"Asambhav",
+"Backre Rehna Re Baba",
+"Bewafaa",
+"Bas Ek Pal",
+"Bombay to Bangkok",
+"Bombay to Goa",
+"Bose - The Forgotten Hero",
+"Chain Khulli Ki Main Khulli",
+"Chamku",
+"Choddon Na Yaar",
+"Contract",
+"Dashavatar",
+"Don Muthu Swami",
+"Eight - Shaani",
+"Eklavya",
+"Fareb",
+"Gumnaam",
+"Gumraah",
+"Gunaah",
+"Humsey Hai Jahaan",
+"Jimmy",
+"Jaanemann",
+"Kaise Kahein",
+"Haal E Dil",
+"Marigold",
+"Mission Istanbul",
+"My Name Is Anthony Gonsalves",
+"One Fine Monday",
+"Paheli",
+"Parineeta",
+"Rakht",
+"Rama Rama Kya Hai Drama",
+"Rok Sako To Rok Lo",
+"Saas Bahu aur Sensex",
+"Shakal Laka Boom Boom",
+"Showbiz",
+"Sirf",
+"Unns",
+"Utthaan",
+"Tango Charlie",
+"Tathastu",
+"Via Darjeeling",
+"Wajjah",
+"1857 - The Rising",
+"Teri Soorat Meri Aankhen",
+"Mujrim",
+"Salam-e-Ishq",
+"Masoom",
+"Game",
+"Jurm",
+"Raaz",
+"Kudrat",
+"Kudrat Ka Kanoon",
+"Jhoot Bole Kauwa Kaate",
+"Dhood Ka Karz",
+"Rafoochakkar",
+"Insaaf Ki Aawaaz",
+"Mujhe Meri Biwi Se Bachao",
+"Sahib Bibi aur Ghulam",
+"Nastik",
+"Satte Pe Satta",
+"Hum Saath Saath Hain",
+"Hum Aapke Hain Kaun",
+"Kuch Kuch Hota Hai",
+"Don",
+"Waaris",
+"Fashion",
+"Hindustani",
+"Neal N Nikki",
+"Corporate",
+"Vaastav",
+"Mission Kashmir",
+"Refugee",
+"Garam Masala",
+"Khakee",
+"Baghban",
+"Baabul",
+"Ghatotkach",
+"Krishna...Aayo Natkhat Nandlal",
+"Kashmir Ki Kali",
+"Tahaan",
+"Sarkar/Sarkar Raj"
+"Tu Bal Bramhachari Main Hoon Kanya Kunwari",
+"Arvind Desai Ki Ajeeb Dastaan",
+"Dhoti Lota Aur Chowpatty",
+"Satah Se Uthata Aadmi",
+"Thodasa Roomani Ho Jayen",
+"Miss Tanakpur Haazir Ho"
+"Mere Dad Ki Maruti",
+"Bhuj: The Pride Of India",
+"Tees Maar Khan",
+"Luv Shuv Tey Chicken Khurana",
+"Zulm O Sitam",
+"Stanley Ka Dabba",
+"Don Muthu Swami",
+"Omerta",
+"Khandani Shafakhana",
+"Bareilly Ki Barfi"
+"Jal Bin Machhli Nritya Bin Bijli",
+"Bandook Dahej Ke Seene Par",
+"Kuku Mathur Ki Jhand Ho Gayi",
+"Andaz Apna Apna",
+"Shin Shinaki Boobla Boo",
+"Crazy Cukkad Family"
+]
+
+if 'movie' not in st.session_state:
+  st.session_state.movie = "Click the button to start!"
+
+col1, col2 = st.columns(2)
+
+with col1:
+  if st.button ('🎲 Pick a Movie'):
+    st.session_state.movie = random.choices(movies)
+st.subheader(f"Your Movie: {st.session_state.movie}")
+
+st.divider()
+st.write("⏱️ Timer")
+timer_seconds = st.number_input("Set timer (seconds):", min_value=10, max_value=300, value=60)
+
+if st.button('⏳ Start Timer'):
+  placeholder = st.empty()
+
+  for remaining in range(timer_seconds, 0, -1):
+    mins, secs = divmod(remaining, 60)
+    time_str = f"{mins:02d}:{secs:02d}"
+    placeholder.metric("Time Remaining", time_str)
+
+    if remaining == 0:
+      st.error("⌛️ Time's up!")
+      play_buzzer()
+    else:
+      time.sleep(1)
